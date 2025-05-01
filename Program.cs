@@ -36,6 +36,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 #endregion
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
+builder.WebHost.UseUrls($"http://*:{port}");
+
 var app = builder.Build();
 
 app.MapControllers();
