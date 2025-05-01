@@ -14,6 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<ITransacaoRepository, TransacaoInMemoryRepository>();
 #endregion
 
+#region Swagger
+builder.Services.AddSwaggerGen();
+#endregion
+
 #region Statistics Services
 builder.Services.AddSingleton<ISumStatisticService, SumStatisticService>();
 builder.Services.AddSingleton<IAverageStatisticService, AverageStatisticService>();
@@ -40,6 +44,9 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
 
